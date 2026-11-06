@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Briefing: Post-Election Data Center Landscape & Regional Projects</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-rose: #f43f5e;
+      --tag-bg: #0f172a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+    .badge-primary { background: #0369a1; color: #e0f2fe; }
+    .badge-alert { background: #881337; color: #ffe4e6; }
+    .badge-warning { background: #78350f; color: #fef3c7; }
+    .badge-success { background: #064e3b; color: #d1fae5; }
+    h1 { font-size: 2.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; color: #fff; }
+    .subtitle { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* Navigation Tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.75rem;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover { background: #334155; color: #fff; }
+    .tab-btn.active { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Cards & Layout */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    .card p { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem; }
+    .card ul { list-style: none; padding-left: 0; }
+    .card ul li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+    .card ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* Data Tables */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow-x: auto;
+      margin-bottom: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      background: #111827;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #263349; }
+
+    /* Callout Boxes */
+    .callout {
+      border-left: 4px solid var(--accent-blue);
+      background: #1e293b;
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .callout-amber { border-left-color: var(--accent-amber); }
+    .callout-rose { border-left-color: var(--accent-rose); }
+    .callout-emerald { border-left-color: var(--accent-emerald); }
+
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+    .tag-grid { background: #1e3a8a; color: #bfdbfe; }
+    .tag-water { background: #134e4a; color: #99f6e4; }
+    .tag-risk { background: #881337; color: #fecdd3; }
+    .tag-shift { background: #713f12; color: #fef08a; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span class="badge badge-primary">Strategic Intelligence Briefing</span>
+        <h1>Post-Election Data Center Risk & Policy Report</h1>
+        <p class="subtitle">Focus: MN, TX, IA, NE | Dedicated Deep-Dive: Project ARO & Project SKW</p>
+      </div>
+      <div style="text-align:right;">
+        <span class="badge badge-success">Live Analysis System</span>
+        <div style="color:var(--text-muted); font-size:0.85rem;">Status: Active Dossier</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="showTab('projects')">1. Specific MN Assets (ARO & SKW)</button>
+    <button class="tab-btn" onclick="showTab('states')">2. Focus States (MN, TX, IA, NE)</button>
+    <button class="tab-btn" onclick="showTab('macro')">3. National & Macro Headwinds</button>
+    <button class="tab-btn" onclick="showTab('live-feed')">4. Live Intel Feed & News Radar</button>
+  </nav>
+
+  <!-- TAB 1: SPECIFIC PROJECTS -->
+  <section id="projects" class="tab-content active">
+    <div class="callout callout-amber">
+      <strong>Special Focus Note:</strong> Projects <strong>ARO</strong> (Hermantown, MN) and <strong>SKW</strong> (Pine Island, MN) represent contrasting utility footprints (Minnesota Power vs. Xcel Energy). Both face heightened post-election scrutiny over residential ratepayer cost insulation, water aquifer protection, and clean energy compliance.
+    </div>
+
+    <div class="grid-2">
+      <!-- Project ARO -->
+      <div class="card" style="border-top: 4px solid var(--accent-blue);">
+        <h3>Project ARO <span class="badge badge-primary">Hermantown, MN</span></h3>
+        <p><strong>Utility Footprint:</strong> Minnesota Power (ALLETE) | Duluth Metro Basin</p>
+        <ul>
+          <li><strong>Statutory Risk (MN Stat. § 216B.1622):</strong> Heightened PUC mandates require dedicated substation and transmission buildouts to be 100% customer-funded, barring any cost socialization across Duluth industrial or residential ratepayers.</li>
+          <li><strong>Lake Superior Basin Environmental Review:</strong> Hermantown borders environmentally sensitive headwaters. Watershed management boards have signaled intense opposition to open-loop cooling towers and diesel backup runoff.</li>
+          <li><strong>Winter Peak Curtailment Agreements:</strong> Minnesota Power's winter peak strain requires firm curtailable power contracts during extreme cold events to avoid grid disruptions.</li>
+          <li><strong>Local Municipality Alignment:</strong> Hermantown City Council debates have centered on local infrastructure wear, emergency fire response upgrades for lithium-ion BESS, and net municipal tax capture versus state abatement caps.</li>
+        </ul>
+      </div>
+
+      <!-- Project SKW -->
+      <div class="card" style="border-top: 4px solid var(--accent-emerald);">
+        <h3>Project SKW <span class="badge badge-success">Pine Island, MN</span></h3>
+        <p><strong>Utility Footprint:</strong> Xcel Energy | Goodhue & Olmsted Counties</p>
+        <ul>
+          <li><strong>100% Clean Energy by 2040 Law:</strong> As part of Xcel Energy’s territory, SKW must align with aggressive statutory decarbonization checkpoints. Large load additions require verified renewable power procurement (PPAs) without delaying coal retirements.</li>
+          <li><strong>Prairie du Chien-Jordan Aquifer Scrutiny:</strong> MN Department of Natural Resources (DNR) water appropriation permits for industrial evaporative cooling face near-certain administrative challenges; closed-loop dry cooling is virtually mandated.</li>
+          <li><strong>Prime Farmland Zoning Battles:</strong> Pine Island sits on high-yield agricultural soils. Olmsted/Goodhue County zoning commissions face pushback from local agrarian advocacy groups over land use rezoning.</li>
+          <li><strong>Highway 52 Transmission Interconnection:</strong> Substation tie-in queue lead times are running 34-48 months unless early capital deposits for high-voltage breakers are executed immediately.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Location</th>
+            <th>Primary Utility</th>
+            <th>Key Election / Regulatory Bottleneck</th>
+            <th>Risk Rating</th>
+            <th>Mitigation Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Project ARO</strong></td>
+            <td>Hermantown, MN</td>
+            <td>Minnesota Power</td>
+            <td>MN Stat. § 216B.1622 large-load cost isolation & local storm/watershed protection</td>
+            <td><span class="badge badge-warning">Moderate-High</span></td>
+            <td>Execute upfront customer-funded interconnection; agree to winter peak demand-response protocols.</td>
+          </tr>
+          <tr>
+            <td><strong>Project SKW</strong></td>
+            <td>Pine Island, MN</td>
+            <td>Xcel Energy</td>
+            <td>DNR groundwater extraction caps & agricultural preservation pushback</td>
+            <td><span class="badge badge-alert">High</span></td>
+            <td>Specify closed-loop air-cooled chillers; secure voluntary agricultural buffer covenants.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TAB 2: FOCUS STATES -->
+  <section id="states" class="tab-content">
+    <div class="grid-2">
+      <!-- Minnesota -->
+      <div class="card">
+        <h3>Minnesota (MN) <span class="badge badge-primary">Split Scrutiny</span></h3>
+        <p><strong>Political Climate:</strong> Divided legislature with bipartisan scrutiny over grid reliability and consumer utility bills.</p>
+        <ul>
+          <li><strong>Key Issue:</strong> Public Utilities Commission (PUC) requires large data center developers to prove zero residential rate inflation.</li>
+          <li><strong>Energy Policy:</strong> 2040 clean energy law forces hyperscalers to bring their own clean firm generation or long-term energy storage.</li>
+          <li><strong>Water Law:</strong> MN DNR hydrogeologists are tightening industrial groundwater extraction limits across eastern aquifers.</li>
+        </ul>
+      </div>
+
+      <!-- Texas -->
+      <div class="card">
+        <h3>Texas (TX) <span class="badge badge-alert">ERCOT Queue Gridlock</span></h3>
+        <p><strong>Political Climate:</strong> Strong executive focus on economic expansion balanced by state senate alarm over grid collapses.</p>
+        <ul>
+          <li><strong>ERCOT Queue:</strong> Over 150 GW of large-load interconnection requests have triggered strict new queue-pruning rules.</li>
+          <li><strong>Behind-the-Meter Scrutiny:</strong> Texas Senate legislative hearings are targeting co-located data centers that bypass public grid tariffs.</li>
+          <li><strong>Water Restrictions:</strong> West and Central Texas municipalities are denying municipal water agreements, forcing air-cooled chillers.</li>
+        </ul>
+      </div>
+
+      <!-- Iowa -->
+      <div class="card">
+        <h3>Iowa (IA) <span class="badge badge-warning">Tax Incentive Re-evaluation</span></h3>
+        <p><strong>Political Climate:</strong> Historically hospitable, but legislative appetite for perpetual sales-tax holidays is cooling.</p>
+        <ul>
+          <li><strong>Property Tax Pushback:</strong> Rural school districts and county boards are demanding clawback provisions on data center tax incentives.</li>
+          <li><strong>Utility Capacity:</strong> MidAmerican Energy and Alliant Energy face wind transmission bottlenecks, requiring grid-tie infrastructure fees.</li>
+          <li><strong>Public Sentiment:</strong> Shifted from overwhelmingly positive to skeptical regarding actual permanent job creation.</li>
+        </ul>
+      </div>
+
+      <!-- Nebraska -->
+      <div class="card">
+        <h3>Nebraska (NE) <span class="badge badge-primary">Public Power Dynamic</span></h3>
+        <p><strong>Political Climate:</strong> The nation's only 100% public power state (NPPD, OPPD, LES) governed by publicly elected boards.</p>
+        <ul>
+          <li><strong>Elected Utility Boards:</strong> Anti-hyperscale candidates winning seats on public power boards have created unpredictable approval timelines.</li>
+          <li><strong>Firm Power Tariffs:</strong> OPPD requires large data loads to fund new natural gas peaking or battery storage units upfront.</li>
+          <li><strong>Economic Nexus:</strong> Strong support from state economic development agencies, but local agricultural concerns over water draw remain active.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: MACRO ISSUES -->
+  <section id="macro" class="tab-content">
+    <div class="grid-4">
+      <div class="card">
+        <h3>Supply Chain</h3>
+        <p>Lead times for high-voltage step-up transformers (GSU) remain at <strong>160 to 210 weeks</strong>. Substation switchgear backlogs are compounding project delivery schedules.</p>
+      </div>
+      <div class="card">
+        <h3>Tariffs & Trade</h3>
+        <p>Proposed and ongoing Section 301/232 tariff expansions on imported electrical steel, inverters, and battery cells threaten a <strong>12-18% CAPEX inflation</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>Labor Constraints</h3>
+        <p>Severe shortage of licensed master electricians and high-voltage technicians in Upper Midwest corridors (MN/IA), driving labor premiums of <strong>25%+</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>Cooling & Water</h3>
+        <p>Regulatory transition away from evaporative cooling toward closed-loop dry cooling and direct-to-chip liquid cooling to satisfy municipal water restrictions.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-rose">
+      <strong>National Trend:</strong> Nationwide FERC transmission pricing reforms and regional RTO queue overhauls mean queue speculation is dead. Projects must show site control, committed capital, and firm utility interconnection agreements to maintain queue positions.
+    </div>
+  </section>
+
+  <!-- TAB 4: LIVE FEED & NEWS -->
+  <section id="live-feed" class="tab-content">
+    <div class="callout callout-emerald">
+      <strong>Live Intelligence Feed:</strong> This table displays real-time policy alerts, dockets, and legislative news. When the scheduled scraper runs, updates to <code>intel_feed.json</code> will automatically appear here.
+    </div>
+
+    <div class="table-container">
+      <table id="intel-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Region / Scope</th>
+            <th>Headline</th>
+            <th>Impact Assessment</th>
+            <th>Classification</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="intel-table-body">
+          <!-- Filled by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div>Data Center Executive Intelligence System &copy; 2026</div>
+    <div>Confidential &bull; Prepared for Internal Infrastructure Team</div>
+  </footer>
+</div>
+
+<script>
+  // Tab Switching Logic
+  function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Initial Fallback Data
+  const fallbackFeed = [
+    {
+      date: "2026-11-06",
+      jurisdiction: "MN (ARO / Hermantown)",
+      headline: "Minnesota Power Submits Grid Modernization Tariff to MN PUC",
+      summary: "Tariff proposal requires new transmission users over 50 MW to fully fund dedicated spur interconnects under MN Statute § 216B.1622.",
+      impact: "High Risk",
+      tag: "Grid",
+      source: "https://mn.gov/puc/"
+    },
+    {
+      date: "2026-11-04",
+      jurisdiction: "MN (SKW / Pine Island)",
+      headline: "DNR Groundwater Advisory for Southeastern Karst Formations",
+      summary: "DNR guidance confirms tight limits on industrial drawdown from Jordan-Prairie du Chien aquifer, strongly penalizing wet-cooling towers.",
+      impact: "Regulatory Shift",
+      tag: "Water",
+      source: "https://www.dnr.state.mn.us/"
+    },
+    {
+      date: "2026-11-02",
+      jurisdiction: "TX (ERCOT)",
+      headline: "Texas Senate Committee Advances Large-Load Co-location Tariff Draft",
+      summary: "Bill seeks to prevent behind-the-meter data centers from avoiding ERCOT transmission system maintenance charges.",
+      impact: "High Risk",
+      tag: "Grid",
+      source: "https://capitol.texas.gov/"
+    },
+    {
+      date: "2026-10-28",
+      jurisdiction: "NE (Public Power)",
+      headline: "OPPD Board of Directors Reviews 400 MW Data Center Capacity Allocation",
+      summary: "Directors demand accelerated capital commitments for battery storage peakers before ratifying new industrial power delivery agreements.",
+      impact: "Regulatory Shift",
+      tag: "Grid",
+      source: "https://www.oppd.com/"
+    },
+    {
+      date: "2026-10-24",
+      jurisdiction: "IA (MidAmerican)",
+      headline: "County Boards Propose Mandatory Infrastructure Mitigation Funds",
+      summary: "Local officials in central Iowa push for local impact fees to offset road damage and emergency service expansions around server farms.",
+      impact: "Local Pushback",
+      tag: "Tariff",
+      source: "https://iowacapitaldispatch.com/"
+    }
+  ];
+
+  function renderTable(data) {
+    const tbody = document.getElementById('intel-table-body');
+    tbody.innerHTML = '';
+    data.forEach(item => {
+      const row = document.createElement('tr');
+      const impactClass = item.impact.includes('High') ? 'tag-risk' : (item.impact.includes('Shift') ? 'tag-shift' : 'tag-grid');
+      row.innerHTML = `
+        <td style="white-space:nowrap; font-weight:600; color:var(--text-muted);">${item.date}</td>
+        <td><strong>${item.jurisdiction}</strong></td>
+        <td>
+          <div style="font-weight:600; color:#fff; margin-bottom:0.25rem;">${item.headline}</div>
+          <div style="color:var(--text-muted); font-size:0.85rem;">${item.summary}</div>
+        </td>
+        <td><span class="tag ${impactClass}">${item.impact}</span></td>
+        <td><span class="tag tag-grid">${item.tag}</span></td>
+        <td><a href="${item.source}" target="_blank" rel="noopener noreferrer" style="color:var(--accent-blue); text-decoration:none; font-size:0.85rem;">View Source &rarr;</a></td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Try to fetch intel_feed.json dynamically; fall back to embedded data if running standalone
+  fetch('intel_feed.json')
+    .then(res => {
+      if (!res.ok) throw new Error("Local feed not loaded yet");
+      return res.json();
+    })
+    .then(data => renderTable(data))
+    .catch(() => renderTable(fallbackFeed));
+</script>
+</body>
+</html>
